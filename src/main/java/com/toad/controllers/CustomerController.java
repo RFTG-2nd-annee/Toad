@@ -104,12 +104,12 @@ public class CustomerController {
         Customer customer = customerRepository.findById(id).orElse(null);
         if (customer != null) {
             Customer filteredCustomer = new Customer();
-            filteredCustomer.setId(customer.getId());
-            filteredCustomer.setStore_Id(customer.getStore_Id());
-            filteredCustomer.setPrenom(customer.getPrenom());
-            filteredCustomer.setNom(customer.getNom());
-            filteredCustomer.setMail(customer.getMail());
-            filteredCustomer.setAdresseId(customer.getAdresseId());
+            filteredCustomer.setCustomerId(customer.getCustomerId());
+            filteredCustomer.setStoreId(customer.getStoreId());
+            filteredCustomer.setFirstName(customer.getFirstName());
+            filteredCustomer.setLastName(customer.getLastName());
+            filteredCustomer.setEmail(customer.getEmail());
+            filteredCustomer.setAddressId(customer.getAddressId());
             filteredCustomer.setActive(customer.getActive());
             filteredCustomer.setCreateUpdate(customer.getCreateUpdate());
             filteredCustomer.setLastUpdate(customer.getLastUpdate());
