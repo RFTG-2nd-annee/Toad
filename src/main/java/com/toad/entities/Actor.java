@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.sql.Timestamp;
 
 @Entity
 public class Actor {
@@ -12,7 +13,7 @@ public class Actor {
     private Integer actor_id;
     private String first_name;
     private String last_name;
-    private String last_update;
+    private Timestamp last_update;
 
     // Getters and Setters
     public Integer getActor_id() {
@@ -39,11 +40,11 @@ public class Actor {
         this.last_name = last_name;
     }
 
-    public String getLast_update() {
+    public Timestamp getLast_update() {
         return last_update;
     }
 
-    public void setLast_update(String last_update) {
+    public void setLast_update(Timestamp last_update) {
         this.last_update = last_update;
     }
 }

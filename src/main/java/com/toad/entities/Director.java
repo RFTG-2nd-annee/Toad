@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.sql.Timestamp;
  
 @Entity // This tells Hibernate to make a table out of this class
 public class Director {
@@ -15,9 +16,9 @@ public class Director {
  
     private String prenom;
  
-    private String date_naissance; // Year is typically handled as Integer
+    private Timestamp date_naissance; // Assurez-vous que cet attribut est de type Timestamp
  
-    private String nationnalite; // TINYINT
+    private String nationalite; // Corrigez l'orthographe ici
  
     // Getters and Setters
     public Integer getdirector_id() {
@@ -44,20 +45,20 @@ public class Director {
         this.prenom = prenom;
     }
  
-    public String  getdate_naissance() {
+    public Timestamp getdate_naissance() {
         return date_naissance;
     }
  
-    public void setdate_naissance(String  date_naissance) {
+    public void setdate_naissance(Timestamp date_naissance) {
         this.date_naissance = date_naissance;
     }
  
-    public String getnationnalite() {
-        return nationnalite;
+    public String getnationalite() {
+        return nationalite; // Corrigez l'orthographe ici
     }
  
-    public void setnationnalite(String nationnalite) {
-        this.nationnalite = nationnalite;
+    public void setnationalite(String nationalite) { // Ajoutez cette méthode
+        this.nationalite = nationalite; // Corrigez l'orthographe ici
     }
  
 }

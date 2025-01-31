@@ -21,53 +21,25 @@ public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
 
-<<<<<<< HEAD
-    @PostMapping(path="/add")
-    public @ResponseBody String addNewCustomer (
-    @PathVariable Integer customer_id,
-    @RequestParam Integer store_id,
-    @RequestParam String first_name,
-    @RequestParam String last_name,
-    @RequestParam String email,
-    @RequestParam Integer address_id,
-    @RequestParam int active,
-    @RequestParam java.sql.Timestamp create_update,
-    @RequestParam java.sql.Timestamp last_update,
-    @RequestParam int password,
-    @RequestParam int age) {
-    // CREATION D'UN CLIENT
-    Customer newCustomer = new Customer();
-    newCustomer.setCustomerId(customer_id);
-    newCustomer.setStoreId(store_id);
-    newCustomer.setFirstName(first_name);
-    newCustomer.setLastName(last_name);
-    newCustomer.setEmail(email);
-    newCustomer.setAddressId(address_id);
-    newCustomer.setCreateDate(create_update);
-    newCustomer.setLastUpdate(last_update);            
-    customerRepository.save(newCustomer);
-
-    return "Client Créer";
-}
-=======
     @PostMapping(path = "/add")
-    public @ResponseBody String addNewCustomer(@PathVariable Integer id,
+    public @ResponseBody String addNewCustomer(@RequestParam Integer customer_id,
             @RequestParam Integer store_id,
-            @RequestParam String prenom,
-            @RequestParam String nom,
-            @RequestParam String mail,
-            @RequestParam Integer adresse_id,
+            @RequestParam String first_name,
+            @RequestParam String last_name,
+            @RequestParam String email,
+            @RequestParam Integer address_id,
             @RequestParam int active,
             @RequestParam java.sql.Timestamp create_update,
             @RequestParam java.sql.Timestamp last_update) {
->>>>>>> 397f09e... GetById Method Fixed
-
         Customer n = new Customer();
-        n.setNom(nom);
-        n.setMail(mail);
-        n.setPrenom(prenom);
+        n.setCustomerId(customer_id);
+        n.setStoreId(store_id);
+        n.setFirstName(first_name);
+        n.setLastName(last_name);
+        n.setEmail(email);
+        n.setAddressId(address_id);
         n.setActive(active);
-        n.setCreateUpdate(create_update);
+        n.setCreateDate(create_update);
         n.setLastUpdate(last_update);
 
         customerRepository.save(n);
