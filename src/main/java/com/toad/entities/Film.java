@@ -47,8 +47,9 @@ public class Film {
     @Column(name = "last_update")
     private java.sql.Timestamp lastUpdate;
 
-    @Column(name = "id_director")
-    private Long idDirector; // BIGINT
+    // Remove or comment out this field if not needed
+    // @Column(name = "id_director")
+    // private Integer idDirector;
 
     // Getters and Setters
     public Integer getFilmId() {
@@ -148,18 +149,25 @@ public class Film {
     }
 
     public java.sql.Timestamp getLastUpdate() {
-        return lastUpdate;
+        // Return defensive copy to maintain immutability
+        return lastUpdate != null ? new java.sql.Timestamp(lastUpdate.getTime()) : null;
     }
 
     public void setLastUpdate(java.sql.Timestamp lastUpdate) {
-        this.lastUpdate = lastUpdate;
+        if (lastUpdate == null) {
+            throw new IllegalArgumentException("lastUpdate cannot be null");
+        }
+        // Create a defensive copy to prevent external modification
+        this.lastUpdate = new java.sql.Timestamp(lastUpdate.getTime());
     }
 
-    public Long getIdDirector() {
-        return idDirector;
-    }
+    // Remove or comment out these methods if not needed
+    // public Integer getIdDirector() {
+    //     return idDirector;
+    // }
+    
+    // public void setIdDirector(Integer idDirector) {
+    //     this.idDirector = idDirector;
+    // }
 
-    public void setIdDirector(Long idDirector) {
-        this.idDirector = idDirector;
-    }
 }
