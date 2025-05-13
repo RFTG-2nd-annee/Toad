@@ -106,29 +106,35 @@ public class InventoryController {
         inventoryRepository.deleteById(id);
         return "Inventaire Supprimé";
     }
-    @DeleteMapping("/deleteDVD/{id}")
-public @ResponseBody String deleteInventorySimple(@PathVariable Integer id) {
-    List<Integer> InventoryId = inventoryDisponibleRepository.findFreeInventoryIdDVD(id);
-    
-    if (InventoryId == null) {
-        return "Erreur : Aucun DVD disponible pour le film ID " + id;
-    }
-
-    for (Integer inventoryId : InventoryId) {
-        Inventory inventory = inventoryRepository.findById(inventoryId).orElse(null);
-        if (inventory != null) {
-            updateInventory(
-                inventoryId, 
-                inventory.getFilmId(), 
-                inventory.getStoreId(), 
-                inventory.getLastUpdate(), 
-                false
-            );
+    @DeleteMapping("/deleteDVD/{filmId}")
+    public @ResponseBody String deleteInventorySimple(@PathVariable Integer filmId) {
+        String returnMessage;
+        //Rechercher les DVD en stock pour le film reçu en paramètre ()
+        List<Integer> inventoryIdList = inventoryDisponibleRepository.findFreeInventoryIdDVD(filmId);
+        
+        if (inventoryIdList == null) {
+            //Revoyer message erreur
+            returnMessage = "Erreur : Aucun DVD disponible pour le film ID " + filmId;
+        }else{
+            //Rechercher le premier dvd de la liste
+            Inventory inventory = inventoryRepository.findById(inventoryIdList.get(0)).orElse(null);
+            if (inventory != null) {
+                //Marquer le DVD comme supprimé
+                updateInventory(
+                        inventory.getInventoryId(),
+                        inventory.getFilmId(),
+                        inventory.getStoreId(),
+                        inventory.getLastUpdate(),
+                        false
+                    );
+                    returnMessage = "DVD marqué supprimé pour le film ID " + filmId;
+            }else{
+                //Envoyer message erreur
+                returnMessage = "Erreur : Aucun DVD disponible pour le film ID " + filmId;
+            }
         }
+        return returnMessage;
     }
-
-    return "DVD marqué supprimé pour le film ID " + id;
-}
 
     
     @GetMapping(path = "/getStockByStore")
